@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+
+	<head lang="en">
+		<meta charset="UTF-8">
+		<title>会员注册</title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+		<link rel="stylesheet" href="$BASE_PATH/resource/assets/css/amazeui.min.css" />
+		<link href="$BASE_PATH/resource/css/dlstyle.css" rel="stylesheet" type="text/css">
+		<script src="$BASE_PATH/resource/js/jquery-3.1.0.min.js"></script>
+		<script src="$BASE_PATH/resource/js/layer/layer.js"></script>
+		<script src="$BASE_PATH/resource/assets/js/amazeui.min.js"></script>
+        <script>
+		   var time=120;
+		   $(function(){
+		      if(!($("#reader-me").is(":checked"))){
+			     $("#regist").attr({"disabled":"disabled"});
+			  }
+		      $("#reader-me").change(function(){
+			      if(this.checked){
+				      $("#regist").removeAttr("disabled");
+				  }else{
+				      $("#regist").attr({"disabled":"disabled"});
+				  }
+			  });
+			  
+			  $("#regist").click(function(){
+			      if($("#phone").val()==""){
+				      layer.tips('请输入手机号', '#phone');
+					  return;
+				  }
+				  if($("#code").val()==""){
+				      layer.tips('请输入验证码', '#code');
+					  return;
+				  }
+				  if($("#password").val()==""){
+				      layer.tips('请设置密码', '#password');
+					  return;
+				  }
+				  if($("#password").val()!=$("#passwordRepeat").val()){
+				      layer.tips('密码和确认密码不一致', '#passwordRepeat');
+					  return;
+				  }
+				  $.ajax({
+				      url:"$BASE_PATH/user/regist/ajaxregist",
+					  type:"post",
+					  dataType:"json",
+					  data:{
+					     "mobile":$("#phone").val(),
+						 "code":$("#code").val(),
+						 "password":$("#password").val(),
+						 "passwordRepeat":$("#passwordRepeat").val()
+					  },
+					  success:function(data){
+						    if(data.code==1){
+							     layer.alert(data.message, {
+				                 icon: 1,
+				                 skin: 'layer-ext-moon' 
+        			             },function(){
+        						    localtion.href="$BASE_PATH/";
+        						 })
+							}else{
+							   layer.alert(data.message, {
+				                  icon: 1,
+				                  skin: 'layer-ext-moon' 
+			                   })
+							}
+					  }
+				  });
+			  });
+		   });
+		   
+		   function getCode(){
+		       $.ajax({
+			      url:"$BASE_PATH/user/regist/sendCode",
+				  dataType:"json",
+				  type:"post",
+				  data:{
+				     "mobile":$("#phone").val()
+				  },
+			      success:function(data){
+				      if(data.code==1){
+					     layer.alert(data.message, {
+				               icon: 1,
+				               skin: 'layer-ext-moon' 
+			             },function(){
+						    setInterval("timer()",1000);
+						 })
+					  }else{
+					     layer.alert(data.message, {
+				               icon: 2,
+				               skin: 'layer-ext-moon' 
+			             })
+					  }
+				  }
+			   });
+		   }
+		   
+		   //60秒倒计时
+		   function timer(){
+		      var second=time--;
+		      $("#send").text(second+"秒后重发");
+			  if(second==0){
+			     getCode();
+			  }
+		   }
+		</script>
+	</head>
+<body>
+  <div class="login-boxtitle">
+	 <a href="$BASE_PATH/"><img alt="" src="$BASE_PATH/resource/images/logobig.png" /></a>
+  </div>
+      <div class="res-banner">
+		 <div class="res-main">
+			<div class="login-banner-bg"><span></span><img src="$BASE_PATH/resource/images/big.jpg" /></div>
+				<div class="login-box">
+						<div class="am-tabs" id="doc-my-tabs">
+				            <ul class="am-tabs-nav am-nav am-nav-tabs am-nav-justify">
+								<li><a href="">会员注册</a></li>
+							</ul>
+								<div class="am-tab-panel">
+									<form method="post">
+                                       <div class="user-phone">
+								         <label for="phone"><i class="am-icon-mobile-phone am-icon-md"></i></label>
+								            <input type="tel" name="mobile" id="phone" placeholder="请输入手机号">
+                                        </div>																			
+										  <div class="verification">
+										    	<label for="code"><i class="am-icon-code-fork"></i></label>
+											     <input type="tel" name="code" id="code" style="width:195px;"  placeholder="请输入验证码">
+												 <button class="am-btn am-btn-primary am-btn-xs" id="send" onclick="getCode()" type="button"  style="width:100px;font-size:16px;">获取验证码</button>
+										   </div>
+                                     <div class="user-pass">
+								    <label for="password"><i class="am-icon-lock"></i></label>
+								    <input type="password" name="" id="password" placeholder="设置密码">
+                                     </div>										
+                 <div class="user-pass">
+								    <label for="passwordRepeat"><i class="am-icon-lock"></i></label>
+								    <input type="password" name="" id="passwordRepeat" placeholder="确认密码">
+                 </div>	
+									</form>
+								 <div class="login-links">
+										<label for="reader-me">
+											<input id="reader-me" checked="checked" type="checkbox"> 点击表示您同意商城《服务协议》
+										</label>
+							  	</div>
+										<div class="am-cf">
+											<input type="submit" name="" value="注册" id="regist" class="am-btn am-btn-primary am-btn-sm am-fl">
+										</div>
+								
+									<hr>
+								</div>
+
+								<script>
+									$(function() {
+									    $('#doc-my-tabs').tabs();
+									  })
+								</script>
+
+							</div>
+						</div>
+
+				</div>
+			</div>
+			
+					<div class="footer ">
+						<div class="footer-hd ">
+							<p>
+								<a href="# ">恒望科技</a>
+								<b>|</b>
+								<a href="# ">商城首页</a>
+								<b>|</b>
+								<a href="# ">支付宝</a>
+								<b>|</b>
+								<a href="# ">物流</a>
+							</p>
+						</div>
+						<div class="footer-bd ">
+							<p>
+								<a href="# ">关于恒望</a>
+								<a href="# ">合作伙伴</a>
+								<a href="# ">联系我们</a>
+								<a href="# ">网站地图</a>
+								<em>© 2015-2025 Hengwang.com 版权所有</em>
+							</p>
+						</div>
+					</div>
+	</body>
+
+</html>
