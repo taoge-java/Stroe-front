@@ -1,7 +1,9 @@
 package com.stroe.model.system;
 
+import com.jfinal.ext.plugin.tablebind.TableBind;
 import com.stroe.model.BaseModel;
 
+@TableBind(tableName="system_region")
 public class SystemRegion extends BaseModel<SystemRegion>{
 
 	/**
