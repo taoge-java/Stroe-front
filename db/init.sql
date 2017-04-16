@@ -1,4 +1,4 @@
----用户信息表
+-- 用户信息表
 drop table if exists user_info;
 create table user_info(
   id int not null auto_increment,
@@ -14,8 +14,7 @@ create table user_info(
   encrypt varchar(100) default null,
   primary key (id)
 )engine=innodb default charset=utf8;
-
---- 系统操作日志表
+-- 系统操作日志表
 drop table if exists system_log;
 create table system_log(
    id int not null auto_increment,
@@ -30,7 +29,7 @@ create table system_log(
    primary key (id)
 ) engine=innodb default charset=utf8;
 
---- 地区表
+-- 地区表
 drop table if exists system_region;
 create table system_region(
   id int not null auto_increment,

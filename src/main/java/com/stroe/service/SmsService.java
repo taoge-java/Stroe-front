@@ -19,7 +19,7 @@ import com.stroe.util.ResultCode;
 
 /**
  * 发送短信service层
- * @author ADMIN
+ * @author zengjintao
  *
  */
 @Repository("smsService")
@@ -30,6 +30,7 @@ public class SmsService {
      * @param content
      * @return
      */
+	@SuppressWarnings("rawtypes")
 	public Result send(String mobile,String content){
 		Result result=new Result();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "验证码发送成功");

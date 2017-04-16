@@ -77,6 +77,7 @@ public class RegisterController extends BaseController{
 			String code=NumberUtil.getNumberCode(6);
 			String content="【天下淘网络商城】您的验证码是:"+code+",十分钟内有效";
 			String result=smsService.sendSms(StroeConfig.ApiKey, mobile, content);
+			System.err.println(content);
 			System.err.println(result);
 			MobileCode mobileCode=new MobileCode(mobile,code,new Date());
 			setSessionAttr(Constant.MOBILE_KEY, mobileCode);//将验证码信息存入session
