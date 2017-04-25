@@ -14,6 +14,7 @@ create table user_info(
   encrypt varchar(100) default null,
   primary key (id)
 )engine=innodb default charset=utf8;
+
 -- 系统操作日志表
 drop table if exists system_log;
 create table system_log(
@@ -42,3 +43,24 @@ create table system_region(
   primary key (id)
 ) engine=innodb default charset=utf8;
 
+-- 商品信息表
+drop table if exists shopping_goods_info;
+create table shopping_goods_info(
+   id int not null auto_increment,
+   shopping_goods_type_id int not null comment "商品类别id",
+   goods_name varchar(100) not null comment "商品名称",
+   count int not null comment "商品总量",
+   sold_count int default  0,
+   description text default "" comment "商品描述",
+   price decimal(10,2) default 0 comment "商品价格",
+   goods_code varchar(100) default null,
+   primary key (id)
+) engine=innodb default charset=utf8;
+
+-- 商品类别表
+drop table if exists shopping_goods_type(
+   id int not null auto_increment,
+   goods_type_name varchar(100) not null comment "类别名称",
+   sort int default 0 comment "排序"
+   primary key (id)
+) engine=innodb default charset=utf8;
