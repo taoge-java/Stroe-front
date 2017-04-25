@@ -11,6 +11,7 @@ import com.stroe.controller.base.BaseController;
  */
 public class SystemRegionController extends BaseController{
 
+	@SuppressWarnings("unused")
 	public void getRegionByPrentId(){
 		String code=getPara(0);
 	}

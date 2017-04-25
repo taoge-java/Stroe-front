@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head lang="en">
 		<meta charset="UTF-8">
 		<title>用户登录</title>
@@ -18,7 +17,7 @@
 	  $(function(){
 	      $("input[name='login']").click(function(){
 		      $.ajax({
-			     url:"$BASE_PATH/user/login",
+			     url:"$BASE_PATH/account/login",
 			     dataType:"json",
 				 type:"post",
 				 data:{

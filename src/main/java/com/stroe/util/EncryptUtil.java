@@ -19,14 +19,32 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class EncryptUtil {
 
 	/**
-	 * md5算法加密
-	 * @throws NoSuchAlgorithmException 
+	 * md5加密
+	 * @param Md5key 
+	 * @param salt 时间戳
+	 * @return
+	 * @throws NoSuchAlgorithmException
 	 */
 	public static String getMd5(String Md5key,String salt) throws NoSuchAlgorithmException{
 		String key=DigestUtils.md5Hex(Md5key)+"&"+salt;
 		return DigestUtils.md5Hex(key);
 	}
 	
+	/**
+	 * md5密码加密
+	 * @param password
+	 * @return
+	 */
+	public static String getMd5(String password){
+		try {
+			MessageDigest digest=MessageDigest.getInstance("md5");
+		    byte[] bytes=digest.digest(password.getBytes());
+		    return Hex.encodeHexString(bytes);
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	/**
 	 * SHA摘要算法

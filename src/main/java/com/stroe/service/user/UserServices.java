@@ -34,7 +34,7 @@ public class UserServices {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public Result regist(String mobile,String code,String password,String passwordRepeat,MobileCode key,HttpServletRequest request){
+    public  Result regist(String mobile,String code,String password,String passwordRepeat,MobileCode mobilekey,HttpServletRequest request){
 		Result result=new Result();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "注册成功");
 		if(StringUtils.isEmpty(mobile)){
@@ -62,18 +62,18 @@ public class UserServices {
 			result.setResultCode(resultCode);
 			return result;
 		}
-		if(key==null){
+		if(mobilekey==null){
 			resultCode=new ResultCode(ResultCode.FAIL, "请发送短信验证码");
 			result.setResultCode(resultCode);
 			return result;
 		}else{
-			if(!key.getCode().equals(code)){
+			if(!mobilekey.getCode().equals(code)){
 				resultCode=new ResultCode(ResultCode.FAIL, "验证码错误");
 				result.setResultCode(resultCode);
 				return result;
 			}
 		}
-		boolean timeout=System.currentTimeMillis()-key.getDateTime().getTime()>10*60*1000;
+		boolean timeout=System.currentTimeMillis()-mobilekey.getDateTime().getTime()>10*60*1000;
 		if(timeout){
 			resultCode=new ResultCode(ResultCode.FAIL, "验证码已超时,请重新获取验证码!");
 			result.setResultCode(resultCode);
@@ -90,6 +90,7 @@ public class UserServices {
 			userInfo.set("regist_time", new Date());
 			userInfo.set("login_name", 10000+i);
 			userInfo.save();
+			i++;
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "注册失败,请联系网站管理员");
 			e.printStackTrace();

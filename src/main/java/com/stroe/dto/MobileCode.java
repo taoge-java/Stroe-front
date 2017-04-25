@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * 手机验证码
  * @author zengjintao
- *2017年3月6日 21:29
+ * 2017年3月6日 21:29
  */
 public class MobileCode {
 
