@@ -1,5 +1,11 @@
 package com.stroe.config;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.util.Properties;
+
 import com.jfinal.config.Constants;
 import com.jfinal.config.Handlers;
 import com.jfinal.config.Interceptors;
@@ -9,19 +15,18 @@ import com.jfinal.config.Routes;
 import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
 import com.jfinal.ext.route.AutoBindRoutes;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Logger;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.plugin.ehcache.EhCachePlugin;
 import com.jfinal.plugin.redis.RedisPlugin;
+import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.stroe.interceptor.ViewContextInterceptor;
 import com.stroe.model.BaseModel;
 
 public class StroeConfig extends JFinalConfig{
 
-	private Logger log=Logger.getLogger(StroeConfig.class);
-	
 	public static final String BASE_VIEW="/WEB-INF/views";
 	
 	public static  String redisHost;
@@ -51,9 +56,22 @@ public class StroeConfig extends JFinalConfig{
 		constants.setUploadedFileSaveDirectory(UploadPath);//设置文件上传路径
 		constants.setError404View(BASE_VIEW+"/error/404.vm");
 		constants.setError500View(BASE_VIEW+"/error/500.vm");
+		String velocity=PathKit.getWebRootPath()+File.separator+"WEB-INF" + "/classes/velocity.properties";
+		InputStream inputStream;
+		try {
+			inputStream = new FileInputStream(new File(velocity));
+			Properties p = new Properties();
+			p.load(inputStream);
+			VelocityRender.setProperties(p);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	
+	public static void main(String[] args) {
+		String velocity=PathKit.getWebRootPath()+File.separator+"WEB-INF" + "/classes/velocity.properties";
+		System.out.println(velocity);
+	}
 	@Override
 	public void configHandler(Handlers handlers) {
 		handlers.add(new ContextPathHandler("BASE_PATH"));
@@ -82,18 +100,11 @@ public class StroeConfig extends JFinalConfig{
 		plugins.add(new EhCachePlugin());
 	}
 
+	/**
+	 * 配置自动路由映射
+	 */
 	@Override
 	public void configRoute(Routes routes) {
 		routes.add(new AutoBindRoutes());
 	}
 }
-
-//	@Override
-//	public void afterJFinalStart() {
-//       new Thread(new Runnable() {
-//			@Override
-//			public void run() {
-//				log.info("系统数据初始化完成。。。。。。");
-//			}
-//		}).start();
-//	}
