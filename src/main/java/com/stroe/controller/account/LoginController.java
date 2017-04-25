@@ -11,11 +11,8 @@ import com.jfinal.log.Logger;
 import com.stroe.constant.Constant;
 import com.stroe.constant.SysEnumConstant.PlatformType;
 import com.stroe.controller.base.BaseController;
-import com.stroe.dto.UserSession;
 import com.stroe.model.user.UserInfo;
 import com.stroe.util.EncryptUtil;
-import com.stroe.util.IpUitls;
-import com.stroe.util.Result;
 import com.stroe.util.ResultCode;
 /**
  * 会员登录
@@ -51,7 +48,7 @@ public class LoginController extends BaseController{
 	public void dologin(){
 		HttpServletRequest request=getRequest();
 		HttpServletResponse response=getResponse();
-		String mobile=getPara("user");
+		String mobile=getPara("mobile");
 		String password=getPara("password");
 		if(StringUtils.isEmpty(mobile)||StringUtils.isEmpty(password)){
 			renderJson(new ResultCode(ResultCode.FAIL, "用户名或密码不能为空"));
@@ -85,6 +82,7 @@ public class LoginController extends BaseController{
 			    	return ;
 	    	    }else{
 	    	    	loginSuccess(userInfo,getRequest());
+	    	    	renderJson(new ResultCode(ResultCode.SUCCESS, "登录成功"));
 	    	    }
 		    }else{
 		    	renderJson(new ResultCode(ResultCode.FAIL, "用户名或密码错误"));
@@ -96,26 +94,7 @@ public class LoginController extends BaseController{
 	    	log.error("登录失败");
 	    }
 	}
-	/**
-	 * 登录成功
-	 * @param userInfo
-	 * @param res
-	 */
-	@SuppressWarnings("rawtypes")
-	private void loginSuccess(UserInfo userInfo,HttpServletRequest res) {
-		Result result=new Result();
-		userInfo.set("login_ip", IpUitls.getAddressIp(res));
-		UserSession session=new UserSession();
-		session.setFlag(userInfo.getBoolean("disabled_flag")?true:false);
-		session.setMobile(userInfo.getStr("mobile"));
-		session.setUserId(userInfo.getInt("id"));
-		session.setUserName(userInfo.getStr("login_name"));
-		res.getSession().setAttribute(Constant.SESSION_ID, session);
-		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "登录成功");
-		systemLog(session.getUserId()+"登录",PlatformType.WEB.getValue());
-		result.setResultCode(resultCode);
-	}
-    
+	
 	/**
 	 * 用户注销
 	 */

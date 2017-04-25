@@ -24,7 +24,6 @@ public class UserServices {
 
 	private Logger log=Logger.getLogger(getClass());
 	
-	private static int i=1;
 	/**
 	 * 会员注册
 	 * @param mobile
@@ -33,7 +32,7 @@ public class UserServices {
 	 * @param passwordRepeat
 	 * @return
 	 */
-	@SuppressWarnings("rawtypes")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
     public  Result regist(String mobile,String code,String password,String passwordRepeat,MobileCode mobilekey,HttpServletRequest request){
 		Result result=new Result();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "注册成功");
@@ -54,6 +53,11 @@ public class UserServices {
 		}
 		if(StringUtils.isEmpty(password)){
 			resultCode=new ResultCode(ResultCode.FAIL, "密码不能为空");
+			result.setResultCode(resultCode);
+			return result;
+		}
+		if(!MatchUtil.checkMatch("[a-zA-Z0-9]{8,16}",password)){
+			resultCode=new ResultCode(ResultCode.FAIL, "密码必须为8到16位的数字和字母组合");
 			result.setResultCode(resultCode);
 			return result;
 		}
@@ -86,11 +90,12 @@ public class UserServices {
 			userInfo.set("encrypt", encrypt);
 			userInfo.set("code", NumberUtil.getNumberCode(4));
 			userInfo.set("password", EncryptUtil.getMd5(password, encrypt));
-			userInfo.set("regist_ip", IpUitls.getAddressIp(request));
+			userInfo.set("ip", IpUitls.getAddressIp(request));
 			userInfo.set("regist_time", new Date());
-			userInfo.set("login_name", 10000+i);
 			userInfo.save();
-			i++;
+			userInfo.set("login_name", 10000+userInfo.getInt("id"));
+			userInfo.update();
+			result.setObject(UserInfo.dao.findById(userInfo.getInt("id")));
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "注册失败,请联系网站管理员");
 			e.printStackTrace();
@@ -99,5 +104,4 @@ public class UserServices {
 		result.setResultCode(resultCode);
 		return result;
 	}
-	
 }

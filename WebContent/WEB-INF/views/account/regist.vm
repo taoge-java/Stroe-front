@@ -14,7 +14,8 @@
 		<script src="$BASE_PATH/resource/js/layer/layer.js"></script>
 		<script src="$BASE_PATH/resource/assets/js/amazeui.min.js"></script>
         <script>
-		   var time=60;
+		var time=60;
+		var interval=null;
 		   $(function(){
 		      if(!($("#reader-me").is(":checked"))){
 			     $("#regist").attr({"disabled":"disabled"});
@@ -26,7 +27,7 @@
 				      $("#regist").attr({"disabled":"disabled"});
 				  }
 			  });
-			  
+			  //注册
 			  $("#regist").click(function(){
 			      if($("#phone").val()==""){
 				      layer.tips('请输入手机号', '#phone');
@@ -59,7 +60,7 @@
 							     layer.alert(data.message, {
 				                 icon: 1,
 								 closeBtn: 0,
-								 time: 2000
+								 time: 5000,
 				                 skin: 'layer-ext-moon',
 								 });
 						        location.href="$BASE_PATH/";
@@ -67,7 +68,7 @@
 							   layer.alert(data.message, {
 				                   icon: 2,
 								   closeBtn: 0,
-								   time: 2000
+								   time: 2000,
 				                   skin: 'layer-ext-moon',
 			                   })
 							}
@@ -75,9 +76,9 @@
 				  });
 			  });
 		   });
-		   
+		   //获取验证码
 		   function getCode(){
-		       $.ajax({
+			   $.ajax({
 			      url:"$BASE_PATH/account/regist/sendCode",
 				  dataType:"json",
 				  type:"post",
@@ -88,27 +89,32 @@
 				      if(data.code==1){
 					     layer.alert(data.message, {
 				               icon: 1,
-				               skin: 'layer-ext-moon' 
-			             },function(){
-						    setInterval("timer()",1000);
-						 })
+				               skin: 'layer-ext-moon',
+							   closeBtn: 0,
+							   time: 2000,
+			             });
+			              interval =setInterval("timer()",1000);
+						  $("#send").attr("disabled","disabled");
 					  }else{
 					     layer.alert(data.message, {
 				               icon: 2,
-				               skin: 'layer-ext-moon' 
-			             })
+				               skin: 'layer-ext-moon' ,
+							   closeBtn: 0,
+							   time: 2000,
+			             });
 					  }
 				  }
 			   });
 		   }
-		   
 		   //60秒倒计时
 		   function timer(){
-		      $("#send").text(second+"秒后重发");
-		      var second=time--;
-			  if(second==0){
+		      $("#send").text(time+"秒后重发");
+		      time--;
+			  if(time<0){
 			     time=60;
-			     getCode();
+				  $("#send").text("重新发送");
+				  $("#send").removeAttr("disabled");
+				  clearInterval(interval);
 			  }
 		   }
 		</script>
@@ -134,7 +140,7 @@
 										  <div class="verification">
 										    	<label for="code"><i class="am-icon-code-fork"></i></label>
 											     <input type="tel" name="code" id="code" style="width:195px;"  placeholder="请输入验证码">
-												 <button class="am-btn am-btn-primary am-btn-xs" id="send" onclick="getCode()" type="button"  style="width:100px;font-size:16px;text-align:center;padding-left:.2em;padding-right:.2em;">获取验证码</button>
+												 <button class="am-btn am-btn-primary am-btn-xs" id="send" onclick="getCode()" type="button"  style="width:100px;font-size:16px;text-align:center;padding-left:.2em;padding-right:.2em;border:none">获取验证码</button>
 										   </div>
                                      <div class="user-pass">
 								    <label for="password"><i class="am-icon-lock"></i></label>

@@ -6,15 +6,23 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import javax.servlet.http.HttpServletRequest;
+
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
+
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.stroe.config.StroeConfig;
 import com.stroe.constant.Constant;
+import com.stroe.constant.SysEnumConstant.PlatformType;
 import com.stroe.dto.UserSession;
 import com.stroe.model.system.SystemLog;
+import com.stroe.model.user.UserInfo;
 import com.stroe.util.DateUtil;
 import com.stroe.util.IpUitls;
 import com.stroe.util.NumberUtil;
+import com.stroe.util.Result;
+import com.stroe.util.ResultCode;
 
 
 /**
@@ -25,15 +33,23 @@ import com.stroe.util.NumberUtil;
 public class BaseController extends Controller{
 
 	public  int pageSize=20;
-	
+	/**
+	 * 页面跳转
+	 * @param viewPath
+	 */
 	public  void RenderView(String viewPath){
 		render(StroeConfig.BASE_VIEW+viewPath);
 	}
 	
+	/**
+	 * 保存系统操作日志
+	 * @param oper_des
+	 * @param type
+	 */
 	public void systemLog(String oper_des,int type){
 		UserSession user=getCurrentUser();
 		SystemLog systemLog=new SystemLog();
-		systemLog.set("oper_user", user.getUserName());
+		systemLog.set("oper_name", user.getUserName());
 		systemLog.set("user_id", user.getUserId());
 		systemLog.set("oper_time", new DateUtil().getDate());
 		systemLog.set("oper_ip", IpUitls.getAddressIp(getRequest()));
@@ -42,9 +58,36 @@ public class BaseController extends Controller{
 		systemLog.save();
 	}
 
+	/**
+	 * 获取用户session信息
+	 * @return
+	 */
 	public UserSession getCurrentUser() {
 		return getSessionAttr(Constant.SESSION_ID);
 	}
+	
+	/**
+	 * 登录成功
+	 * @param userInfo
+	 * @param res
+	 */
+	public void loginSuccess(UserInfo userInfo,HttpServletRequest request) {
+		userInfo.set("ip", IpUitls.getAddressIp(request));
+		userInfo.update();
+		UserSession session=new UserSession();
+		session.setFlag(userInfo.getBoolean("disabled_flag")?true:false);
+		session.setMobile(userInfo.getStr("mobile"));
+		session.setUserId(userInfo.getInt("id"));
+		session.setUserName(userInfo.getStr("login_name"));
+		request.getSession().setAttribute(Constant.SESSION_ID, session);
+		systemLog(session.getUserId()+"登录",PlatformType.WEB.getValue());
+	}
+    public static void main(String[] args) {
+		new BaseController().test();
+	}
+    public void test(){
+    	System.out.println(IpUitls.getAddressIp(getRequest()));
+    }
 	/**
 	 * 文件上传重命名
 	 * @param upload

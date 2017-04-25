@@ -2,8 +2,12 @@
 				<ul class="message-l">
 					<div class="topMessage">
 						<div class="menu-hd">
+							#if($session)
+								<a href="$BASE_PATH/account/regist" target="_top">欢迎您,$session.userName</a>
+							#else
 							<a href="$BASE_PATH/account/login" style="color:red" target="_top" class="h">亲，请登录</a>
 							<a href="$BASE_PATH/account/regist" target="_top">免费注册</a>
+							#end
 						</div>
 					</div>
 				</ul>

@@ -10,9 +10,9 @@ public class ResultCode {
 	
     private String message="";
 	
-	public static final int SUCCESS=0;
+	public static final int SUCCESS=1;
 	
-	public static final int FAIL=-1;
+	public static final int FAIL=0;
 	
 	public ResultCode(int code, String message) {
 		this.code = code;

@@ -2,15 +2,14 @@
 drop table if exists user_info;
 create table user_info(
   id int not null auto_increment,
-  login_name varchar(100) not null,
+  login_name varchar(100) default null,
   password varchar(100) not null,
   email varchar(100) default null,
   mobile varchar(20) not null,
   code varchar(100) not null,
-  regist_ip varchar(100) default null,
+  ip varchar(100) default null,
   regist_time datetime default null,
-  disabled_flag tinyint default 0,
-  login_ip varchar(100) default null,
+  disabled_flag tinyint(1) default 0,
   encrypt varchar(100) default null,
   primary key (id)
 )engine=innodb default charset=utf8;
@@ -23,11 +22,24 @@ create table system_log(
    oper_time datetime default null,
    oper_ip varchar(100) default "",
    oper_desc varchar(1024) default "",
-   log_type tinyint default 0,
+   login_type tinyint default 0,
    platform_type tinyint default 0,
    user_type tinyint default 0,
    user_id int default 0,
    primary key (id)
+) engine=innodb default charset=utf8;
+
+-- 短信发送记录表
+drop table if exists sms_send_log;
+create table sms_send_log(
+    id int not null auto_increment,
+    user_info_id int  not null,
+    mobile varchar(100) not null,
+    content varchar(100) default null,
+    send_status tinyint(1) default 1,
+    send_remark varchar(100) default "",
+    create_at datetime default null,
+    primary key (id)
 ) engine=innodb default charset=utf8;
 
 -- 地区表

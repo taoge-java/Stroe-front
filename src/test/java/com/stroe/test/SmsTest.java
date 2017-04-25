@@ -3,7 +3,6 @@ package com.stroe.test;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
@@ -11,8 +10,8 @@ import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 
-import com.google.gson.JsonObject;
 import com.stroe.util.HttpClientUtil;
+import com.stroe.util.MatchUtil;
 
 import net.sf.json.JSONObject;
 
@@ -74,5 +73,10 @@ public class SmsTest {
 		 map.put("content", "【叮咚云】您的验证码是：1234");
 		 String result=HttpClientUtil.httpPostRequest(url, map);
 		 System.out.println(result);
+	 }
+	 
+	 @Test
+	 public void testPassword(){
+		System.out.println(MatchUtil.checkMatch("[a-zA-Z0-9]{8,16}", "aa123456C")); ;
 	 }
 }

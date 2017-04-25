@@ -52,6 +52,8 @@ public class RegisterController extends BaseController{
 		String passwordRepeat=getPara("passwordRepeat");
 		MobileCode mobileKey=(MobileCode) getSession().getAttribute(Constant.MOBILE_KEY);
 		Result result=userService.regist(mobile, code, password, passwordRepeat, mobileKey,getRequest());
+		loginSuccess((UserInfo)result.getObject(), getRequest());
+		System.err.println(result.getResultCode().getCode());
 		renderJson(result.getResultCode());
 	}
 	
