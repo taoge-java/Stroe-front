@@ -14,7 +14,7 @@ public class IpUitls {
 	 * @return
 	 */
    public static String getAddressIp(HttpServletRequest request){
-	   String ip = request.getHeader("x-forwarded-for"); 
+	    String ip = request.getHeader("x-forwarded-for"); 
 	    if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) { 
 	      ip = request.getHeader("Proxy-Client-IP"); 
 	    } 

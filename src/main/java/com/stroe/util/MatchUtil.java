@@ -12,8 +12,8 @@ public class MatchUtil {
 
 	/**
 	 * 
-	 * @param regEx
-	 * @param target
+	 * @param regEx   正则
+	 * @param target  目标字符串
 	 * @return
 	 */
 	public static boolean checkMatch(String regEx,String target){

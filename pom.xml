@@ -3,76 +3,64 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.Stroe</groupId>
   <artifactId>Stroe</artifactId>
-  <packaging>ejb</packaging>
+  <packaging>com.stroe</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Maven Maven Webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-    <!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
 	    <groupId>junit</groupId>
 	    <artifactId>junit</artifactId>
 	    <version>4.12</version>
 	</dependency>
 
-    <!-- https://mvnrepository.com/artifact/net.sf.ehcache/ehcache -->
 	<dependency>
 	    <groupId>net.sf.ehcache</groupId>
 	    <artifactId>ehcache</artifactId>
 	    <version>2.10.3</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-aop</artifactId>
 	    <version>4.1.6.RELEASE</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-jdbc</artifactId>
 	    <version>4.1.6.RELEASE</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-tx</artifactId>
 	    <version>4.3.6.RELEASE</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-beans</artifactId>
 	    <version>4.3.6.RELEASE</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
 	<dependency>
 	    <groupId>org.springframework</groupId>
 	    <artifactId>spring-core</artifactId>
 	    <version>5.0.0.M5</version>
 	</dependency>
-    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-	<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
-<dependency>
-    <groupId>org.aspectj</groupId>
-    <artifactId>aspectjweaver</artifactId>
-    <version>1.8.10</version>
-</dependency>
+	<dependency>
+	    <groupId>org.aspectj</groupId>
+	    <artifactId>aspectjweaver</artifactId>
+	    <version>1.8.10</version>
+	</dependency>
 
-    <!-- https://mvnrepository.com/artifact/cn.dreampie/jfinal-routebind -->
 	<dependency>
 	    <groupId>cn.dreampie</groupId>
 	    <artifactId>jfinal-routebind</artifactId>
 	    <version>0.1</version>
 	</dependency>
     
-	<!-- https://mvnrepository.com/artifact/com.jfinal/jfinal-ext -->
     <dependency>
       <groupId>com.jfinal</groupId>
       <artifactId>jfinal-ext</artifactId>
       <version>3.1.4</version>
     </dependency>
-	<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>javax.servlet-api</artifactId>
@@ -100,13 +88,11 @@
 	    <artifactId>commons-email</artifactId>
 	    <version>1.4</version>
    </dependency>
-   <!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
-<dependency>
-    <groupId>org.quartz-scheduler</groupId>
-    <artifactId>quartz</artifactId>
-    <version>2.2.3</version>
-</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+	<dependency>
+	    <groupId>org.quartz-scheduler</groupId>
+	    <artifactId>quartz</artifactId>
+	    <version>2.2.3</version>
+	</dependency>
 	<dependency>
 	    <groupId>org.apache.httpcomponents</groupId>
 	    <artifactId>httpclient</artifactId>
@@ -137,7 +123,6 @@
 	    <artifactId>javase</artifactId>
 	    <version>3.3.0</version>
 	</dependency>
-<!-- https://mvnrepository.com/artifact/org.quartz-scheduler/quartz -->
 	<dependency>
 	    <groupId>org.quartz-scheduler</groupId>
 	    <artifactId>quartz</artifactId>
@@ -159,13 +144,16 @@
 	    <artifactId>velocity-tools</artifactId>
 	    <version>2.0</version>
 	</dependency>
-	<!-- https://mvnrepository.com/artifact/org.apache.velocity/velocity -->
-<dependency>
-    <groupId>org.apache.velocity</groupId>
-    <artifactId>velocity</artifactId>
-    <version>1.7</version>
-</dependency>
-	
+	<dependency>
+	    <groupId>org.apache.velocity</groupId>
+	    <artifactId>velocity</artifactId>
+	    <version>1.7</version>
+	</dependency>
+	<dependency>
+	    <groupId>com.thoughtworks.xstream</groupId>
+	    <artifactId>xstream</artifactId>
+	    <version>1.4.9</version>
+	</dependency>
 	<dependency>
 	    <groupId>javax.servlet</groupId>
 	    <artifactId>jstl</artifactId>

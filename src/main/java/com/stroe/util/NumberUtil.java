@@ -4,11 +4,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-
 /**
- * 
  * @author zengjintao
- *
+ * @version 1.0
+ * @create_at 2017年4月25日 上午9:06:02
  */
 public class NumberUtil {
 

@@ -70,10 +70,6 @@ public class StroeConfig extends JFinalConfig{
 		/**配置cp3p0数据库连接池**/
 		DruidPlugin druid = new DruidPlugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
 		plugins.add(druid);
-//		C3p0Plugin c3p0=new C3p0Plugin(PropKit.get("jdbcUrl"), PropKit.get("user"), PropKit.get("password"));
-//		ActiveRecordPlugin active=new ActiveRecordPlugin(c3p0);
-//		plugins.add(c3p0);
-//		plugins.add(active);
 		//配置数据表自动路由映射
 		AutoTableBindPlugin table=new AutoTableBindPlugin(druid);
 		table.autoScan(true);
@@ -90,14 +86,14 @@ public class StroeConfig extends JFinalConfig{
 	public void configRoute(Routes routes) {
 		routes.add(new AutoBindRoutes());
 	}
-
-	@Override
-	public void afterJFinalStart() {
-       new Thread(new Runnable() {
-			@Override
-			public void run() {
-				log.info("系统数据初始化完成。。。。。。");
-			}
-		}).start();
-	}
 }
+
+//	@Override
+//	public void afterJFinalStart() {
+//       new Thread(new Runnable() {
+//			@Override
+//			public void run() {
+//				log.info("系统数据初始化完成。。。。。。");
+//			}
+//		}).start();
+//	}

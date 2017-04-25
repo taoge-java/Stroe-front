@@ -2,8 +2,9 @@ package com.stroe.util;
 
 /**
  * 返回结果工具类
- * @author ADMIN
- *
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月25日 上午9:05:32
  */
 public class Result<T>{
 
