@@ -12,4 +12,7 @@ import com.stroe.controller.base.BaseController;
 @ControllerBind(controllerKey="/account/forget")
 public class ForgetPasswordController extends BaseController{
 
+	public void index(){
+		
+	}
 }

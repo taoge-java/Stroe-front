@@ -8,8 +8,6 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
-
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.stroe.config.StroeConfig;
@@ -21,8 +19,6 @@ import com.stroe.model.user.UserInfo;
 import com.stroe.util.DateUtil;
 import com.stroe.util.IpUitls;
 import com.stroe.util.NumberUtil;
-import com.stroe.util.Result;
-import com.stroe.util.ResultCode;
 
 
 /**
@@ -82,12 +78,7 @@ public class BaseController extends Controller{
 		request.getSession().setAttribute(Constant.SESSION_ID, session);
 		systemLog(session.getUserId()+"登录",PlatformType.WEB.getValue());
 	}
-    public static void main(String[] args) {
-		new BaseController().test();
-	}
-    public void test(){
-    	System.out.println(IpUitls.getAddressIp(getRequest()));
-    }
+	
 	/**
 	 * 文件上传重命名
 	 * @param upload

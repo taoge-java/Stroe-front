@@ -2,9 +2,10 @@ package com.stroe.spring;
 
 import org.springframework.context.ApplicationContext;
 /**
- * 手动管理spring
- * @author ADMIN
- *
+ * 手动Srping管理
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月26日 上午9:55:59
  */
 public class SpringBeanManger {
 
