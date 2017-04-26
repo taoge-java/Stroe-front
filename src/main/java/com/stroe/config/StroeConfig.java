@@ -23,7 +23,12 @@ import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.stroe.interceptor.ViewContextInterceptor;
 import com.stroe.model.BaseModel;
-
+/**
+ * 项目配置入口
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年4月26日 下午1:53:09
+ */
 public class StroeConfig extends JFinalConfig{
 
 	public static final String BASE_VIEW="/WEB-INF/views";
