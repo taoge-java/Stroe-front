@@ -37,7 +37,7 @@ create table sms_send_log(
     mobile varchar(100) not null,
     content varchar(100) default null,
     send_status tinyint(1) default 1,
-    send_remark varchar(100) default "",
+    send_remark varchar(100) default null,
     create_at datetime default null,
     primary key (id)
 ) engine=innodb default charset=utf8;
