@@ -32,7 +32,7 @@ public class Mail {
 	public void setProperties(Properties properties) {
 		this.properties = properties;
 	}
-	public Mail(String username, String password, String from, String mailHost, int port, boolean auth,Properties properties) {
+	public Mail(String username, String password, String from, String mailHost, int port, boolean auth) {
 		this.username = username;
 		this.password = password;
 		this.from = from;
