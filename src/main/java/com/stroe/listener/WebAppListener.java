@@ -21,7 +21,7 @@ public class WebAppListener implements ServletContextListener{
 	@Override
 	public void contextInitialized(ServletContextEvent event) {
 		ApplicationContext app=new  ClassPathXmlApplicationContext("spring-context.xml");
-		SpringBeanManger.initSpring(app);
+		SpringBeanManger.initContext(app);
 		log.info("spring-context.xml加载完成.......");
 	}
 

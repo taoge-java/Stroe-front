@@ -22,8 +22,11 @@ import com.jfinal.plugin.redis.RedisPlugin;
 import com.jfinal.render.VelocityRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.stroe.interceptor.IocInterceptor;
 import com.stroe.interceptor.ViewContextInterceptor;
 import com.stroe.model.BaseModel;
+import com.stroe.spring.SpringBeanManger;
+import com.stroe.spring.SpringPlugin;
 /**
  * 项目配置入口
  * @author zengjintao
@@ -72,10 +75,7 @@ public class StroeConfig extends JFinalConfig{
 		}
 	}
 
-	public static void main(String[] args) {
-		String velocity=PathKit.getWebRootPath()+File.separator+"WEB-INF" + "/classes/velocity.properties";
-		System.out.println(velocity);
-	}
+	
 	
 	@Override
 	public void configHandler(Handlers handlers) {
@@ -86,6 +86,7 @@ public class StroeConfig extends JFinalConfig{
 	@Override
 	public void configInterceptor(Interceptors interceptors) {
 		interceptors.add(new ViewContextInterceptor());
+		interceptors.add(new IocInterceptor());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -104,6 +105,7 @@ public class StroeConfig extends JFinalConfig{
 		plugins.add(redis);
 		//配置缓存插件
 		plugins.add(new EhCachePlugin());
+		plugins.add(new SpringPlugin(SpringBeanManger.getContext()));//集成spring
 	}
 
 	/**
@@ -115,8 +117,10 @@ public class StroeConfig extends JFinalConfig{
 	}
 
 	@Override
-	public void configEngine(Engine me) {
-		// TODO Auto-generated method stub
-		
+	public void configEngine(Engine me) {}
+	
+	public static void main(String[] args) {
+		String velocity=PathKit.getWebRootPath()+File.separator+"WEB-INF" + "/classes/velocity.properties";
+		System.out.println(velocity);
 	}
 }

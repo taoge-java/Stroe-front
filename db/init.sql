@@ -69,6 +69,7 @@ create table shopping_goods_info(
    id int not null auto_increment,
    shopping_goods_type_id int not null comment "商品类别id",
    goods_name varchar(100) not null comment "商品名称",
+   image varchar(255) default "",
    count int not null comment "商品总量",
    sold_count int not null comment "售价",
    description text default "" comment "商品描述",
@@ -120,6 +121,8 @@ create table shopping_user_address(
 
  primary key (id)
 )engine=innodb default charset=utf8;
+
+
 -- 用户信息表
 drop table if exists user_info;
 create table user_info(
