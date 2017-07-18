@@ -22,7 +22,7 @@ import com.stroe.util.ResultCode;
 @ControllerBind(controllerKey="/account/login")
 public class LoginController extends BaseController{
 	
-	private Logger log=Logger.getLogger(getClass());
+	private static final Logger log=Logger.getLogger(LoginController.class);
 	/**
 	 * 登录页面
 	 */
@@ -39,11 +39,11 @@ public class LoginController extends BaseController{
 				 }
 			 }
 		}
-		RenderView("/account/login.vm");
+		renderView("/account/login.vm");
 	}
 	
 	/**
-	 * 出来用户登录
+	 * 用户登录
 	 */
 	public void dologin(){
 		HttpServletRequest request=getRequest();

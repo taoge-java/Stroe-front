@@ -5,7 +5,6 @@ import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.jfinal.aop.Duang;
 import com.jfinal.ext.route.ControllerBind;
 import com.jfinal.log.Logger;
 import com.stroe.config.StroeConfig;
@@ -17,10 +16,10 @@ import com.stroe.dto.MobileCode;
 import com.stroe.model.system.SmsSendLog;
 import com.stroe.model.user.UserInfo;
 import com.stroe.service.SmsService;
+import com.stroe.service.base.Result;
 import com.stroe.service.user.UserServices;
 import com.stroe.util.MatchUtil;
 import com.stroe.util.NumberUtil;
-import com.stroe.util.Result;
 import com.stroe.util.ResultCode;
 
 import net.sf.json.JSONObject;
@@ -32,22 +31,22 @@ import net.sf.json.JSONObject;
 @ControllerBind(controllerKey="/account/regist")
 public class RegisterController extends BaseController{
 
-	private Logger log=Logger.getLogger(getClass());
+	private static final Logger log=Logger.getLogger(RegisterController.class);
 	
-	private SmsService smsService=Duang.duang(SmsService.class);
+	private SmsService smsService=enhance(SmsService.class);
 	
-	private UserServices userService=Duang.duang(UserServices.class);
+	private UserServices userService=enhance(UserServices.class);
+	
 	/**
 	 * 访问注册页面
 	 */
 	public void index(){
-		RenderView("/account/regist.vm");
+		renderView("/account/regist.vm");
 	}
 	
     /**
      * ajax校验用户注册信息
      */
-	@SuppressWarnings("rawtypes")
 	public void ajaxregist(){
 		String mobile=getPara("mobile");
 		String code=getPara("code");
@@ -55,7 +54,7 @@ public class RegisterController extends BaseController{
 		String passwordRepeat=getPara("passwordRepeat");
 		MobileCode mobileKey=(MobileCode) getSession().getAttribute(Constant.MOBILE_KEY);
 		Result result=userService.regist(mobile, code, password, passwordRepeat, mobileKey,getRequest());
-		loginSuccess((UserInfo)result.getObject(), getRequest());
+		loginSuccess((UserInfo)result.getModel("userInfo"), getRequest());
 		System.err.println(result.getResultCode().getCode());
 		renderJson(result.getResultCode());
 	}

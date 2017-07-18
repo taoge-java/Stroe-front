@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.jfinal.aop.Duang;
 import com.jfinal.core.Controller;
 import com.jfinal.upload.UploadFile;
 import com.stroe.config.StroeConfig;
@@ -33,8 +34,12 @@ public class BaseController extends Controller{
 	 * 页面跳转
 	 * @param viewPath
 	 */
-	public  void RenderView(String viewPath){
+	public  void renderView(String viewPath){
 		render(StroeConfig.BASE_VIEW+viewPath);
+	}
+	
+	public <T> T enhance(Class<T> targetClass){
+		return  Duang.duang(targetClass.getName(),targetClass);
 	}
 	
 	/**
@@ -84,7 +89,7 @@ public class BaseController extends Controller{
 	 * @param upload
 	 * @return
 	 */
-	public String UploadRename(UploadFile upload){
+	public String uploadRename(UploadFile upload){
 		File file=upload.getFile();
 		FileInputStream in=null;
 		String oldName=upload.getFileName();//得到文件名称

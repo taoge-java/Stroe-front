@@ -7,11 +7,13 @@ import org.apache.commons.lang.StringUtils;
 import com.jfinal.log.Logger;
 import com.stroe.dto.MobileCode;
 import com.stroe.model.user.UserInfo;
+import com.stroe.service.base.BaseService;
+import com.stroe.service.base.DefaultResult;
+import com.stroe.service.base.Result;
 import com.stroe.util.EncryptUtil;
 import com.stroe.util.IpUitls;
 import com.stroe.util.MatchUtil;
 import com.stroe.util.NumberUtil;
-import com.stroe.util.Result;
 import com.stroe.util.ResultCode;
 
 /**
@@ -19,10 +21,10 @@ import com.stroe.util.ResultCode;
  * @author zengjintao
  * 2017年3月4号 19:19
  */
-public class UserServices {
+public class UserServices extends BaseService{
 
 
-	private Logger log=Logger.getLogger(getClass());
+	private static final Logger log=Logger.getLogger(UserServices.class);
 	
 	/**
 	 * 会员注册
@@ -32,9 +34,8 @@ public class UserServices {
 	 * @param passwordRepeat
 	 * @return
 	 */
-	@SuppressWarnings({ "rawtypes", "unchecked" })
     public  Result regist(String mobile,String code,String password,String passwordRepeat,MobileCode mobilekey,HttpServletRequest request){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "注册成功");
 		if(StringUtils.isEmpty(mobile)){
 			resultCode=new ResultCode(ResultCode.FAIL, "手机号不能为空");
@@ -95,7 +96,7 @@ public class UserServices {
 			userInfo.save();
 			userInfo.set("login_name", 10000+userInfo.getInt("id"));
 			userInfo.update();
-			result.setObject(UserInfo.dao.findById(userInfo.getInt("id")));
+			result.setModel("userInfo", userInfo);
 		}catch(Exception e){
 			resultCode=new ResultCode(ResultCode.FAIL, "注册失败,请联系网站管理员");
 			e.printStackTrace();

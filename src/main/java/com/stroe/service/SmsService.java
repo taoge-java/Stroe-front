@@ -12,8 +12,10 @@ import org.springframework.stereotype.Repository;
 
 import com.jfinal.log.Logger;
 import com.stroe.config.StroeConfig;
+import com.stroe.service.base.BaseService;
+import com.stroe.service.base.DefaultResult;
+import com.stroe.service.base.Result;
 import com.stroe.util.HttpClientUtil;
-import com.stroe.util.Result;
 import com.stroe.util.ResultCode;
 
 
@@ -23,16 +25,17 @@ import com.stroe.util.ResultCode;
  *
  */
 @Repository("smsService")
-public class SmsService {
-	private Logger log=Logger.getLogger(getClass());
+public class SmsService extends BaseService{
+	
+	private static final Logger log=Logger.getLogger(SmsService.class);
+	
     /**
      * @param mobile
      * @param content
      * @return
      */
-	@SuppressWarnings("rawtypes")
 	public Result send(String mobile,String content){
-		Result result=new Result();
+		Result result=new DefaultResult();
 		ResultCode resultCode=new ResultCode(ResultCode.SUCCESS, "验证码发送成功");
 		try{
 			HashMap<String, String> map=new HashMap<String, String>();

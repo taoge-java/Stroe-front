@@ -15,7 +15,7 @@ public class IndexController extends BaseController{
 	 * 访问商城首页
 	 */
 	public void index(){
-		RenderView("/index.vm");
+		renderView("/index.vm");
 	}
 	
 }
