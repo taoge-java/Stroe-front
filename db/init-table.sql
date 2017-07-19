@@ -145,6 +145,28 @@ create table shopping_user_address(
   primary key (id)
 )engine=innodb default charset=utf8;
 
+-- 商品颜色表
+drop table if exists goods_color;
+create table goods_color(
+   id int not null auto_increment,
+   code varchar(100) default null,
+   name varchar(100) not null,
+   create_user  varchar(255) default null,
+   create_at  varchar(255) default null,
+   remark  varchar(100) not null
+   primary key (id)
+)engine=innodb default charset=utf8;
+
+-- 商品单位表
+drop table if exists goods_unit;
+create table goods_unit(
+   id int not null auto_increment,
+   name varchar(100) not null,
+   create_user  varchar(255) default null,
+   create_at  varchar(255) default null,
+   remark  varchar(100) not null
+   primary key (id)
+)engine=innodb default charset=utf8;
 
 -- 用户信息表
 drop table if exists user_info;
