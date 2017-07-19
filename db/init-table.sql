@@ -68,7 +68,7 @@ drop table if exists shopping_goods_info;
 create table shopping_goods_info(
    id int not null auto_increment,
    shopping_goods_type_id int not null comment "商品类别id",
-   goods_name varchar(100) not null comment "商品名称",
+   name varchar(100) not null comment "商品名称",
    image varchar(255) default "",
    count int not null comment "商品总量",
    sold_count int not null comment "售价",
@@ -79,11 +79,12 @@ create table shopping_goods_info(
 ) engine=innodb default charset=utf8;
 
 -- 商品类别表
-drop table if exists shopping_goods_type(
+drop table if exists shopping_goods_type;
+create table shopping_goods_type(
    id int not null auto_increment,
-   goods_type_name varchar(100) not null comment "类别名称",
-   parent_id int default 0;
-   sort int default 0 comment "排序"
+   name varchar(100) not null comment "类别名称",
+   parent_id int default 0,
+   sort int default 0 comment "排序",
    primary key (id)
 ) engine=innodb default charset=utf8;
 
@@ -92,14 +93,14 @@ drop table if exists shopping_goods_order;
 create table shopping_goods_order(
    id int not null auto_increment,
    user_info_id int not null,
-   order_code vahchar(100) not null,
+   order_code varchar(100) not null,
    amount decimal(10,2) default null,
-   order_time datetime defualt null,
-   send_time datetime defualt null,
+   order_time datetime default null,
+   send_time datetime default null,
    order_status int default 1,
    create_user varchar(100) default null,
-   create_at datetime defualt null,
-   remark varchar(255) default null
+   create_at datetime default null,
+   remark varchar(255) default null,
    primary key (id)
 )engine=innodb default charset=utf8;
 
@@ -109,18 +110,18 @@ create table shopping_goods_brand(
   id int not null auto_increment,
   name varchar(100) not null,
   create_user varchar(100) default null,
-  create_at datetime defualt null,
+  create_at datetime default null,
   primary key (id)
 )engine=innodb default charset=utf8;
 
---商品订单关联货品表
+-- 商品订单关联货品表
 drop table if exists shopping_goods_order_relevance;
-create table shopping_goods_order(
+create table shopping_goods_order_relevance(
   id int not null auto_increment,
   shopping_goods_order_id int not null,
   shopping_goods_info_id int not null,
-  buy_number int default 0,
-  amount int default 0，
+  buy_number int default '0',
+  amount int default 0,
   price int not null,
   primary key (id)
 )engine=innodb default charset=utf8;
@@ -129,7 +130,7 @@ create table shopping_goods_order(
 drop table if exists shopping_user_address;
 create table shopping_user_address(
   id int not null auto_increment,
-  user_info _id int not null,
+  user_info_id int not null,
   receiver varchar(100) not null,
   mobile varchar(100) not null,
   default_flag tinyint(1) default 0,
@@ -153,7 +154,7 @@ create table goods_color(
    name varchar(100) not null,
    create_user  varchar(255) default null,
    create_at  varchar(255) default null,
-   remark  varchar(100) not null
+   remark  varchar(100) not null,
    primary key (id)
 )engine=innodb default charset=utf8;
 
@@ -164,7 +165,7 @@ create table goods_unit(
    name varchar(100) not null,
    create_user  varchar(255) default null,
    create_at  varchar(255) default null,
-   remark  varchar(100) not null
+   remark  varchar(100) not null,
    primary key (id)
 )engine=innodb default charset=utf8;
 
