@@ -103,6 +103,16 @@ create table shopping_goods_order(
    primary key (id)
 )engine=innodb default charset=utf8;
 
+-- 商品品牌表
+drop table if exists shopping_goods_brand;
+create table shopping_goods_brand(
+  id int not null auto_increment,
+  name varchar(100) not null,
+  create_user varchar(100) default null,
+  create_at datetime defualt null,
+  primary key (id)
+)engine=innodb default charset=utf8;
+
 --商品订单关联货品表
 drop table if exists shopping_goods_order_relevance;
 create table shopping_goods_order(
@@ -118,8 +128,21 @@ create table shopping_goods_order(
 -- 用户地址表
 drop table if exists shopping_user_address;
 create table shopping_user_address(
-
- primary key (id)
+  id int not null auto_increment,
+  user_info _id int not null,
+  receiver varchar(100) not null,
+  mobile varchar(100) not null,
+  default_flag tinyint(1) default 0,
+  province_code varchar(100) not null,
+  province_name varchar(100) not null,
+  city_code varchar(100) not null,
+  city_name varchar(100) not null,
+  county_code varchar(100) not null,
+  county_name varchar(100) not null,
+  address varchar(255) not null,
+  create_user  varchar(255) default null,
+  create_at  varchar(255) default null,
+  primary key (id)
 )engine=innodb default charset=utf8;
 
 

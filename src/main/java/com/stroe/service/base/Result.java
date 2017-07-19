@@ -15,6 +15,10 @@ public interface Result {
 
 	static final String DEFAULT_MODEL_KEY="default_model";
 	
+	/**
+	 * 测试结果是否成功
+	 * @return
+	 */
 	public boolean isSuccess();
 	
 	public void setModel(String key,Object value);
@@ -23,6 +27,10 @@ public interface Result {
 	
 	public void setResultCode(ResultCode resultCode);
 	
+	/**
+	 * 获得返回code
+	 * @return
+	 */
 	public ResultCode getResultCode();
 	
 	public Map<String,Object>  getModels();
