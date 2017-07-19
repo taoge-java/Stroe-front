@@ -8,7 +8,7 @@ import com.stroe.model.BaseModel;
  * @version 1.0
  * @create_at 2017年7月18日下午9:51:33
  */
-@TableBind(tableName="ShoppingGoodsOrder")
+@TableBind(tableName="shopping_goods_order")
 public class ShoppingGoodsOrder extends BaseModel<ShoppingGoodsOrder>{
 
 	/**

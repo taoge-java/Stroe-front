@@ -8,7 +8,12 @@ import org.springframework.context.ApplicationContext;
 import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
-
+/**
+ * spring插件拦截器
+ * @author zengjintao
+ * @version 1.0
+ * @create_at 2017年7月19日下午1:12:26
+ */
 public class IocInterceptor implements Interceptor{
 
    public static ApplicationContext ctx;

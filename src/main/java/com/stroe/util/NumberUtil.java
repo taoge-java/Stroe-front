@@ -11,6 +11,11 @@ import java.util.Random;
  */
 public class NumberUtil {
 
+	/**
+	 * 生成验证码
+	 * @param number
+	 * @return
+	 */
 	public static String getNumberCode(int number){
 		String str="1234567890";
 		StringBuilder sb=new StringBuilder();
@@ -27,6 +32,7 @@ public class NumberUtil {
 		DateFormat format = new SimpleDateFormat("yyyy-MMdd");
 		return format.format(new Date()).replaceAll("-", "/");
 	}
+	
  	public static void main(String[] args) {
 		System.out.println(NumberUtil.getNumberCode(6));
 	}

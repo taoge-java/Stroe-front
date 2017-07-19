@@ -5,7 +5,7 @@ package com.stroe.constant;
  * @author zengjintao
  * 2017年3月6日 21:33
  */
-public class Constant {
+public final class Constant {
     /**用户session*/
 	public static final  String SESSION_ID="session_id";
 	 /**用户cookie*/

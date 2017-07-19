@@ -8,18 +8,16 @@ import java.lang.annotation.Target;
 
 public class Inject {
 
-private Inject() {}
+    private Inject() {}
+    
 	@Inherited
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.FIELD})
-	public static @interface BY_TYPE {
-		
-	}
+	public static @interface BY_TYPE {}
 	
 	@Inherited
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.FIELD})
-	public static @interface BY_NAME {
+	public static @interface BY_NAME {}
 		
-	}
 }
