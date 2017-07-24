@@ -185,3 +185,19 @@ create table user_info(
   primary key (id)
 )engine=innodb default charset=utf8;
 
+-- 用户站内信表
+drop table if exists user_message;
+create table user_message(
+  id int not null auto_increment,
+  title varchar(100) not null,
+  content varchar(255) not null,
+  form_user_id int default 0,
+  to_user_id int not null,
+  read_flag tinyint(1) default 0,
+  created_at datetime default null,
+  create_user varchar(100) default null,
+  from_delete_flag tinyint(1) default 0,
+  to_delete_flag tinyint(1) default 0,
+  primary key (id)
+)engine=innodb default charset=utf8;
+
